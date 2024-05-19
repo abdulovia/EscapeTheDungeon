@@ -15,23 +15,26 @@ class TreasureRoom extends Room {
     private function generateTreasure() {
         switch ($this->rarity) {
             case 'common':
-                $this->treasure = rand(10, 20);
+                $this->treasure = rand(0, 10);
                 break;
             case 'rare':
-                $this->treasure = rand(20, 50);
+                $this->treasure = rand(10, 20);
                 break;
             case 'epic':
-                $this->treasure = rand(50, 100);
+                $this->treasure = rand(20, 30);
                 break;
             default:
                 $this->treasure = 0;
         }
     }
 
+    public function getTreasureRarity() {
+        return $this->rarity;
+    }
+
     public function collectTreasure() {
         $treasure = $this->treasure;
         $this->treasure = 0;
-        $this->visit();
         return $treasure;
     }
 }

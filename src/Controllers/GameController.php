@@ -14,18 +14,14 @@ class GameController {
         $this->view = $view;
     }
 
-    public function run() {
-        $this->game->start();
-        $this->view->welcome();
-
+    public function startGame() {
+        $this->view->startView();
+        $this->game->placePlayerAtStart(); // Помещаем игрока в начальную комнату и взаимодействуем с ней
+        $this->view->displayMoveResult();
+        $this->view->displayCurrentRoom();
         while (!$this->game->isComplete()) {
-            $currentRoom = $this->game->getCurrentRoom();
-            $this->view->displayRoom($currentRoom);
-
-            $roomId = $this->view->askForRoomId();
-            $this->game->makeMove($roomId);
+            $this->view->promptMove(); // Итерация следующего хода игрока
         }
-
-        $this->view->congratulate($this->game->getScore(), $this->game->getPath());
+        $this->view->displayCompletion();
     }
 }

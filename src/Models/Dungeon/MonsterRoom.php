@@ -10,18 +10,26 @@ class MonsterRoom extends Room {
         $this->strength = $strength;
     }
 
-    public function fight() {
-        while ($this->strength > 0) {
-            $roll = rand(1, 100);
-            if ($roll > $this->strength) {
-                $this->visit();
-                return $this->strength;
-            } else {
-                $this->strength -= rand(1, 10); 
-            }
+    public function fightMonster() {
+        $roll = rand(1, 10);
+        if ($roll > $this->strength) {
+            $this->strength = -1;
+        } else {
+            $this->strength -= $roll; 
         }
-
-        $this->visit();
-        return 0;
+        return $roll;
     }
+
+    public function getMonster() {
+        return $this;
+    }
+
+    public function getStrength() {
+        return $this->strength;
+    }
+
+    public function isDefeated() {
+        return $this->strength < 0;
+    }
+    
 }

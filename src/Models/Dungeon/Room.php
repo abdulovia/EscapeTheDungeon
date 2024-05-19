@@ -4,11 +4,13 @@ namespace EscapeTheDungeon\Models\Dungeon;
 
 class Room {
     protected $id;
-    protected $doors = [];
-    protected $visited = false;
+    protected $doors;
+    protected $visited;
 
     public function __construct($id) {
         $this->id = $id;
+        $this->doors = [];
+        $this->visited = false;
     }
 
     public function getId() {
