@@ -3,22 +3,22 @@
 namespace EscapeTheDungeon\Views;
 
 use EscapeTheDungeon\Models\Game\Game;
-use EscapeTheDungeon\Models\Dungeon\TreasureRoom;
-use EscapeTheDungeon\Models\Dungeon\MonsterRoom;
 
 class ConsoleView {
-    private $game;
+    private Game $game;
 
     public function __construct(Game $game) {
         $this->game = $game;
     }
 
-    public function startView() {
+    public function startView(): void
+    {
         echo "Добро пожаловать в игру EscapeTheDungeon!\n";
         echo "Вы начинаете свое приключение...\n";
     }
 
-    public function promptMove() {
+    public function promptMove(): void
+    {
         echo "\nВведите номер комнаты для перехода: ";
         $roomId = trim(fgets(STDIN));
         $doors = array_map(function($room) {
@@ -34,7 +34,8 @@ class ConsoleView {
         }
     }
 
-    public function displayCurrentRoom() {
+    public function displayCurrentRoom(): void
+    {
         $currentRoom = $this->game->getCurrentRoom();
         echo "Вы в комнате " . $currentRoom->getId() . "\n";
 
@@ -45,13 +46,14 @@ class ConsoleView {
         echo "Доступные комнаты для перехода: " . implode(", ", $doors) . "\n";
     }
 
-    public function displayMoveResult() {
+    public function displayMoveResult(): void
+    {
         echo "Ваш текущий счет: " . $this->game->getScore() . "\n";
     }
 
-    public function displayCompletion() {
+    public function displayCompletion(): void
+    {
         echo "\nПоздравляем, вы достигли выхода из подземелья!\n";
         echo "Ваш итоговый счет: " . $this->game->getScore() . "\n";
-        echo "Ваш путь: " . implode(" -> ", $this->game->getPath()) . "\n";
     }
 }

@@ -6,21 +6,21 @@ use EscapeTheDungeon\Models\Game\Game;
 use EscapeTheDungeon\Views\ConsoleView;
 
 class GameController {
-    private $game;
-    private $view;
+    private Game $game;
+    private ConsoleView $view;
 
     public function __construct(Game $game, ConsoleView $view) {
         $this->game = $game;
         $this->view = $view;
     }
 
-    public function startGame() {
-        $this->view->startView();
-        $this->game->placePlayerAtStart(); // Помещаем игрока в начальную комнату и взаимодействуем с ней
+    public function startGame(): void
+    {
         $this->view->displayMoveResult();
         $this->view->displayCurrentRoom();
+        // Обрабатываем перемещения игрока пока игрок не достигнет выхода
         while (!$this->game->isComplete()) {
-            $this->view->promptMove(); // Итерация следующего хода игрока
+            $this->view->promptMove();
         }
         $this->view->displayCompletion();
     }

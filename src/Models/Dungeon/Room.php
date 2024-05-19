@@ -3,9 +3,9 @@
 namespace EscapeTheDungeon\Models\Dungeon;
 
 class Room {
-    protected $id;
-    protected $doors;
-    protected $visited;
+    protected int $id;
+    protected array $doors;
+    protected bool $visited;
 
     public function __construct($id) {
         $this->id = $id;
@@ -13,23 +13,28 @@ class Room {
         $this->visited = false;
     }
 
-    public function getId() {
+    public function getId(): int
+    {
         return $this->id;
     }
 
-    public function addDoor(Room $room) {
+    public function addDoor(Room $room): void
+    {
         $this->doors[] = $room;
     }
 
-    public function getDoors() {
+    public function getDoors(): array
+    {
         return $this->doors;
     }
 
-    public function isVisited() {
+    public function isVisited(): bool
+    {
         return $this->visited;
     }
 
-    public function visit() {
+    public function visit(): void
+    {
         $this->visited = true;
     }
 }

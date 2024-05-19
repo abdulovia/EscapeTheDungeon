@@ -3,14 +3,15 @@
 namespace EscapeTheDungeon\Models\Dungeon;
 
 class MonsterRoom extends Room {
-    private $strength;
+    private int $strength;
 
     public function __construct($id, $strength) {
         parent::__construct($id);
         $this->strength = $strength;
     }
 
-    public function fightMonster() {
+    public function fightMonster(): int
+    {
         $roll = rand(1, 10);
         if ($roll > $this->strength) {
             $this->strength = -1;
@@ -20,15 +21,13 @@ class MonsterRoom extends Room {
         return $roll;
     }
 
-    public function getMonster() {
-        return $this;
-    }
-
-    public function getStrength() {
+    public function getStrength(): int
+    {
         return $this->strength;
     }
 
-    public function isDefeated() {
+    public function isDefeated(): bool
+    {
         return $this->strength < 0;
     }
     

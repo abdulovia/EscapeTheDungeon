@@ -3,8 +3,8 @@
 namespace EscapeTheDungeon\Models\Dungeon;
 
 class TreasureRoom extends Room {
-    private $rarity;
-    private $treasure;
+    private string $rarity;
+    private int $treasure;
 
     public function __construct($id, $rarity) {
         parent::__construct($id);
@@ -12,27 +12,23 @@ class TreasureRoom extends Room {
         $this->generateTreasure();
     }
 
-    private function generateTreasure() {
-        switch ($this->rarity) {
-            case 'common':
-                $this->treasure = rand(0, 10);
-                break;
-            case 'rare':
-                $this->treasure = rand(10, 20);
-                break;
-            case 'epic':
-                $this->treasure = rand(20, 30);
-                break;
-            default:
-                $this->treasure = 0;
-        }
+    private function generateTreasure(): void
+    {
+        $this->treasure = match ($this->rarity) {
+            'common' => rand(0, 10),
+            'rare' => rand(10, 20),
+            'epic' => rand(20, 30),
+            default => 0,
+        };
     }
 
-    public function getTreasureRarity() {
+    public function getTreasureRarity(): string
+    {
         return $this->rarity;
     }
 
-    public function collectTreasure() {
+    public function collectTreasure(): int
+    {
         $treasure = $this->treasure;
         $this->treasure = 0;
         return $treasure;
