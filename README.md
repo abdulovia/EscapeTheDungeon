@@ -62,7 +62,9 @@ EscapeTheDungeon — это текстовая консольная игра, в
 
 ## Пример вывода в консоли
 
-![alt text](image-3.png)
-![alt text](image-4.png)
+<img width="570" alt="image" src="https://github.com/abdulovia/EscapeTheDungeon/assets/52665965/891b9005-4256-4651-858d-076ad8afac78">
+<img width="876" alt="image" src="https://github.com/abdulovia/EscapeTheDungeon/assets/52665965/a1903c85-ffa8-471a-a3e2-f7536ed58626">
+
+
 
 
