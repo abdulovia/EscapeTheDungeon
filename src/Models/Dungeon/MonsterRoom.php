@@ -17,7 +17,7 @@ class MonsterRoom extends Room {
                 $this->visit();
                 return $this->strength;
             } else {
-                $this->strength -= rand(1, 10); // Уменьшаем силу монстра
+                $this->strength -= rand(1, 10); 
             }
         }
 

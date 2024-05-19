@@ -13,33 +13,18 @@ class Game {
 
     public function __construct(Dungeon $dungeon) {
         $this->dungeon = $dungeon;
-        $this->player = new Player();
-        $this->currentRoom = $dungeon->getStartRoom();
+        $this->player = new Player($dungeon->getStartRoom());
+        $this->currentRoom = $this->player->getCurrentRoom();
     }
 
     public function start() {
         $this->path[] = $this->currentRoom->getId();
     }
 
-    public function move($roomId) {
-        $nextRoom = $this->dungeon->getRoom($roomId);
-        if (in_array($nextRoom, $this->currentRoom->getDoors())) {
-            $this->currentRoom = $nextRoom;
-            $this->path[] = $this->currentRoom->getId();
-            $this->interactWithRoom();
-        }
-    }
-
-    private function interactWithRoom() {
-        if (!$this->currentRoom->isVisited()) {
-            if ($this->currentRoom instanceof TreasureRoom) {
-                $treasure = $this->currentRoom->collectTreasure();
-                $this->player->addPoints($treasure);
-            } elseif ($this->currentRoom instanceof MonsterRoom) {
-                $points = $this->currentRoom->fight();
-                $this->player->addPoints($points);
-            }
-        }
+    public function makeMove($roomId) {
+        $this->player->makeMove($roomId, $this->dungeon);
+        $this->currentRoom = $this->player->getCurrentRoom();
+        $this->path[] = $this->currentRoom->getId();
     }
 
     public function isComplete() {

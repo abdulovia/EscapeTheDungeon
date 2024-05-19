@@ -23,7 +23,7 @@ class GameController {
             $this->view->displayRoom($currentRoom);
 
             $roomId = $this->view->askForRoomId();
-            $this->game->move($roomId);
+            $this->game->makeMove($roomId);
         }
 
         $this->view->congratulate($this->game->getScore(), $this->game->getPath());
